@@ -71,13 +71,13 @@ def get_dataloaders(args):
         if 'train' in args.splits:
             train_loader = torch.utils.data.DataLoader(
                 train_set, batch_size=args.batch_size,
-                sampler=torch.utils.data.sampler.SubsetRandomSampler(
+                sampler=torch.utils.data.sampler.SubsetRandomSampler(   ########
                     train_set_index[:-num_sample_valid]),
                 num_workers=args.workers, pin_memory=True)
         if 'val' in args.splits:
             val_loader = torch.utils.data.DataLoader(
                 train_set, batch_size=args.batch_size,
-                sampler=torch.utils.data.sampler.SubsetRandomSampler(
+                sampler=torch.utils.data.sampler.SubsetRandomSampler(  ########
                     train_set_index[-num_sample_valid:]),
                 num_workers=args.workers, pin_memory=True)
         if 'test' in args.splits:
@@ -85,7 +85,7 @@ def get_dataloaders(args):
                 val_set,
                 batch_size=args.batch_size, shuffle=False,
                 num_workers=args.workers, pin_memory=True)
-    else:
+    else:  # args.use_valid=false
         if 'train' in args.splits:
             train_loader = torch.utils.data.DataLoader(
                 train_set,
